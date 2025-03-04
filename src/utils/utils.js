@@ -1,17 +1,28 @@
 import { Op } from "sequelize";
-import _ from "lodash";
+import Sequelize from "sequelize";
 
 const queryParamsToWhereClause = (query) => {
-  const whereClause = {};
+  let whereClause = {};
 
   for (const key in query) {
-    if (typeof query[key] === "object") {
+    if (key === "ingredients" && Array.isArray(query[key])) {
+      whereClause = {
+        ...whereClause,
+        [Op.and]: [
+          {
+            ingredients: {
+              [Op.contains]: query[key],
+            },
+          },
+          Sequelize.where(
+            Sequelize.fn("array_length", Sequelize.col("ingredients"), 1),
+            query[key].length
+          ),
+        ],
+      };
+    } else if (typeof query[key] === "object") {
       for (const operator in query[key]) {
         let value = query[key][operator];
-
-        if (typeof value === "string") {
-          value = value.toLowerCase();
-        }
 
         value = value === "null" ? null : value;
 

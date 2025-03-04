@@ -1,14 +1,8 @@
 import express from "express";
 
-import {
-  getAllDishes,
-  getDishById,
-  getDishesByIngredients,
-} from "../controllers/dishes.js";
+import { getAllDishes, getDishById } from "../controllers/dishes.js";
 
 const app = express.Router();
-
-app.get("/by-ingredients", getDishesByIngredients);
 
 app.get("/", getAllDishes);
 

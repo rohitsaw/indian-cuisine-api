@@ -1,7 +1,6 @@
 import {
   getAllDishes as getAllDishesFromDB,
   getOneDishById,
-  getDishesByIngredients as getDishesByIngredientsFromDB,
 } from "../db/queries/dishes.js";
 
 import { queryParamsToWhereClause } from "../utils/utils.js";
@@ -43,17 +42,4 @@ const getDishById = async (req, res) => {
   }
 };
 
-const getDishesByIngredients = async (req, res) => {
-  let ingredients = req.query.ingredients
-    .split(",")
-    .map((i) => i.trim().toLowerCase());
-  try {
-    const results = await getDishesByIngredientsFromDB(ingredients);
-    return res.status(200).send(results);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send({ error: error.message });
-  }
-};
-
-export { getAllDishes, getDishById, getDishesByIngredients };
+export { getAllDishes, getDishById };

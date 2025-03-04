@@ -3,12 +3,12 @@ import { Joi } from "express-validation";
 const validateDishesSchema = (query) => {
   const schema = Joi.object({
     diet: Joi.object({
-      eq: Joi.string().optional(),
-      ne: Joi.string().optional(),
-      gt: Joi.string().optional(),
-      lt: Joi.string().optional(),
-      gte: Joi.string().optional(),
-      lte: Joi.string().optional(),
+      eq: Joi.string().lowercase().optional(),
+      ne: Joi.string().lowercase().optional(),
+      gt: Joi.string().lowercase().optional(),
+      lt: Joi.string().lowercase().optional(),
+      gte: Joi.string().lowercase().optional(),
+      lte: Joi.string().lowercase().optional(),
     }).optional(),
 
     prep_time: Joi.object({
@@ -30,40 +30,52 @@ const validateDishesSchema = (query) => {
     }).optional(),
 
     flavor_profile: Joi.object({
-      eq: Joi.string().optional(),
-      ne: Joi.string().optional(),
-      gt: Joi.string().optional(),
-      lt: Joi.string().optional(),
-      gte: Joi.string().optional(),
-      lte: Joi.string().optional(),
+      eq: Joi.string().lowercase().optional(),
+      ne: Joi.string().lowercase().optional(),
+      gt: Joi.string().lowercase().optional(),
+      lt: Joi.string().lowercase().optional(),
+      gte: Joi.string().lowercase().optional(),
+      lte: Joi.string().lowercase().optional(),
     }).optional(),
 
     course: Joi.object({
-      eq: Joi.string().optional(),
-      ne: Joi.string().optional(),
-      gt: Joi.string().optional(),
-      lt: Joi.string().optional(),
-      gte: Joi.string().optional(),
-      lte: Joi.string().optional(),
+      eq: Joi.string().lowercase().optional(),
+      ne: Joi.string().lowercase().optional(),
+      gt: Joi.string().lowercase().optional(),
+      lt: Joi.string().lowercase().optional(),
+      gte: Joi.string().lowercase().optional(),
+      lte: Joi.string().lowercase().optional(),
     }).optional(),
 
     state: Joi.object({
-      eq: Joi.string().optional(),
-      ne: Joi.string().optional(),
-      gt: Joi.string().optional(),
-      lt: Joi.string().optional(),
-      gte: Joi.string().optional(),
-      lte: Joi.string().optional(),
+      eq: Joi.string().lowercase().optional(),
+      ne: Joi.string().lowercase().optional(),
+      gt: Joi.string().lowercase().optional(),
+      lt: Joi.string().lowercase().optional(),
+      gte: Joi.string().lowercase().optional(),
+      lte: Joi.string().lowercase().optional(),
     }).optional(),
 
     region: Joi.object({
-      eq: Joi.string().optional(),
-      ne: Joi.string().optional(),
-      gt: Joi.string().optional(),
-      lt: Joi.string().optional(),
-      gte: Joi.string().optional(),
-      lte: Joi.string().optional(),
+      eq: Joi.string().lowercase().optional(),
+      ne: Joi.string().lowercase().optional(),
+      gt: Joi.string().lowercase().optional(),
+      lt: Joi.string().lowercase().optional(),
+      gte: Joi.string().lowercase().optional(),
+      lte: Joi.string().lowercase().optional(),
     }).optional(),
+
+    ingredients: Joi.string()
+      .custom((value, helpers) => {
+        const ingredientsArray = value
+          .split(",")
+          .map((item) => item.trim().toLowerCase());
+        if (ingredientsArray.some((item) => !item)) {
+          return helpers.error("any.invalid");
+        }
+        return ingredientsArray;
+      })
+      .optional(),
   }).unknown(false);
 
   return schema.validate(query, { abortEarly: false });

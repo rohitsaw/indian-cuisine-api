@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 const sanitezeIndianFoodArray = (array) => {
   array = array.map((item) => {
     return {
