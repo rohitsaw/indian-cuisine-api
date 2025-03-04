@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Indian Cuisine API
+  description: API to explore Indian cuisine
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local Development Server
+
+paths:
+  /dishes:
+    get:
+      summary: Get all dishes
+      description: Retrieve a list of all available Indian dishes
+      parameters:
+        - name: prep_time[eq]
+          in: query
+          description: Exact preparation time
+          schema:
+            type: integer
+        - name: prep_time[gte]
+          in: query
+          description: Minimum preparation time
+          schema:
+            type: integer
+        - name: prep_time[gt]
+          in: query
+          description: Preparation time greater than
+          schema:
+            type: integer
+        - name: prep_time[lte]
+          in: query
+          description: Maximum preparation time
+          schema:
+            type: integer
+        - name: prep_time[lt]
+          in: query
+          description: Preparation time less than
+          schema:
+            type: integer
+
+        - name: cook_time[eq]
+          in: query
+          description: Exact cooking time
+          schema:
+            type: integer
+        - name: cook_time[gte]
+          in: query
+          description: Minimum cooking time
+          schema:
+            type: integer
+        - name: cook_time[gt]
+          in: query
+          description: Cooking time greater than
+          schema:
+            type: integer
+        - name: cook_time[lte]
+          in: query
+          description: Maximum cooking time
+          schema:
+            type: integer
+        - name: cook_time[lt]
+          in: query
+          description: Cooking time less than
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dish"
+
+  /dishes/{id}:
+    get:
+      summary: Get a specific dish
+      description: Retrieve details of a dish by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the dish
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Dish found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dish"
+        "404":
+          description: Dish not found
+
+  /dishes/by-ingredients:
+    get:
+      summary: Find dishes by ingredients
+      description: Retrieve dishes that can be prepared with the given ingredients
+      parameters:
+        - name: ingredients
+          in: query
+          description: Comma-separated list of available ingredients
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of matching dishes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dish"
+
+components:
+  schemas:
+    Dish:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        ingredients:
+          type: string
+        diet:
+          type: string
+        prep_time:
+          type: integer
+        cook_time:
+          type: integer
+        flavor_profile:
+          type: string
+        course:
+          type: string
+        state:
+          type: string
+        region:
+          type: string
