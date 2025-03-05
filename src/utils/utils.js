@@ -1,6 +1,10 @@
 import { Op } from "sequelize";
 import Sequelize from "sequelize";
 
+const queryParamsToOrder = (sort) => {
+  return sort.split(",").map((sortField) => sortField.split(":"));
+};
+
 const queryParamsToWhereClause = (query) => {
   let whereClause = {};
 
@@ -51,4 +55,4 @@ const queryParamsToWhereClause = (query) => {
   return whereClause;
 };
 
-export { queryParamsToWhereClause };
+export { queryParamsToWhereClause, queryParamsToOrder };

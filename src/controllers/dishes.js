@@ -3,7 +3,10 @@ import {
   getOneDishById,
 } from "../db/queries/dishes.js";
 
-import { queryParamsToWhereClause } from "../utils/utils.js";
+import {
+  queryParamsToWhereClause,
+  queryParamsToOrder,
+} from "../utils/utils.js";
 import { convertValuesToStartCase } from "../utils/format.js";
 
 import { validateDishesSchema } from "../validations/dishes.js";
@@ -17,13 +20,16 @@ const getAllDishes = async (req, res) => {
       return res.status(400).send({ error: error });
     }
 
-    const { pageNumber, pageSize, ...filteredValueForWhereClause } = value;
-    const whereClause = queryParamsToWhereClause(filteredValueForWhereClause);
+    const { pagination, sort, ...filteredValueForWhereClause } = value;
 
-    const dishes = await getAllDishesFromDB(whereClause, {
-      pageSize,
-      pageNumber,
-    });
+    const whereClause = queryParamsToWhereClause(filteredValueForWhereClause);
+    const orderClause = queryParamsToOrder(sort);
+
+    const dishes = await getAllDishesFromDB(
+      whereClause,
+      orderClause,
+      pagination
+    );
     const sanitizeDishes = convertValuesToStartCase(dishes);
 
     return res.status(200).send(sanitizeDishes);

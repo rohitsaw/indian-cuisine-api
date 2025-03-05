@@ -1,9 +1,10 @@
 import { sequelize } from "../postgres.js";
 
-const getAllDishes = async (whereClause, { pageNumber, pageSize }) => {
+const getAllDishes = async (whereClause, order, { pageNumber, pageSize }) => {
   const { count, rows: dishes } =
     await sequelize.models.Cuisine.findAndCountAll({
       where: whereClause,
+      order: order,
       limit: pageSize,
       offset: (pageNumber - 1) * pageSize,
       raw: true,

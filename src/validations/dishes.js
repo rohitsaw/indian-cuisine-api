@@ -2,9 +2,6 @@ import { Joi } from "express-validation";
 
 const validateDishesSchema = (query) => {
   const schema = Joi.object({
-    pageNumber: Joi.number().optional().default(1).strict(false).greater(0),
-    pageSize: Joi.number().optional().default(10).strict(false).greater(0),
-
     name: Joi.object({
       eq: Joi.string().lowercase().optional(),
       ne: Joi.string().lowercase().optional(),
@@ -88,6 +85,38 @@ const validateDishesSchema = (query) => {
         return ingredientsArray;
       })
       .optional(),
+
+    sort: Joi.string()
+      .custom((value, helpers) => {
+        const validFields = [
+          "name",
+          "diet",
+          "prep_time",
+          "cook_time",
+          "flavor_profile",
+          "course",
+          "state",
+          "region",
+          "ingredients",
+        ];
+        const sortParams = value.split(",");
+        for (const param of sortParams) {
+          const [field, order] = param.split(":");
+          if (
+            !validFields.includes(field) ||
+            !["asc", "desc"].includes(order)
+          ) {
+            return helpers.error("any.invalid");
+          }
+        }
+        return value;
+      })
+      .optional(),
+
+    pagination: Joi.object({
+      pageNumber: Joi.number().optional().default(1).strict(false).greater(0),
+      pageSize: Joi.number().optional().default(10).strict(false).greater(0),
+    }).optional(),
   }).unknown(false);
 
   return schema.validate(query, { abortEarly: false });
