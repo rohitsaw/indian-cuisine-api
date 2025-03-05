@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import Sequelize from "sequelize";
 
 const queryParamsToOrder = (sort) => {
-  return sort.split(",").map((sortField) => sortField.split(":"));
+  return sort.map((sortField) => sortField.split(":"));
 };
 
 const queryParamsToWhereClause = (query) => {

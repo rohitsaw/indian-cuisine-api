@@ -99,7 +99,9 @@ const validateDishesSchema = (query) => {
           "region",
           "ingredients",
         ];
-        const sortParams = value.split(",");
+        const sortParams = value
+          .split(",")
+          .map((item) => item.trim().toLowerCase());
         for (const param of sortParams) {
           const [field, order] = param.split(":");
           if (
@@ -109,14 +111,16 @@ const validateDishesSchema = (query) => {
             return helpers.error("any.invalid");
           }
         }
-        return value;
+        return sortParams;
       })
       .optional(),
 
     pagination: Joi.object({
       pageNumber: Joi.number().optional().default(1).strict(false).greater(0),
       pageSize: Joi.number().optional().default(10).strict(false).greater(0),
-    }).optional(),
+    })
+      .optional()
+      .default(),
   }).unknown(false);
 
   return schema.validate(query, { abortEarly: false });

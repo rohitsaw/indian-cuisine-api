@@ -268,16 +268,22 @@ paths:
           schema:
             type: string
 
-        - name: pageSize
+        - name: pagination[pageSize]
           in: query
           description: Number of items per page
           schema:
             type: integer
-        - name: pageNumber
+        - name: pagination[pageNumber]
           in: query
           description: Page number to retrieve
           schema:
             type: integer
+
+        - name: sort
+          in: query
+          description: Sort by field (eg:- name:asc,prep_time:desc)
+          schema:
+            type: List of field:order (comma separated)
 
       responses:
         "200":

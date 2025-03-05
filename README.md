@@ -92,16 +92,16 @@ Each query parameter supports the following notations for querying data except `
     /dishes?state[eq]=null
     ```
 
-9.  **Filter dishes that can be made with ingredients 'chicken' and 'rice'**:
-
-    ```
-    /dishes?ingredients=chicken,rice
-    ```
-
-10. **Filter by preparation time between 10 and 20 minutes**:
+9.  **Filter by preparation time between 10 and 20 minutes**:
 
     ```
     /dishes?prep_time[gte]=10&prep_time[lte]=20
+    ```
+
+10. **Filter dishes that can be made with ingredients 'chicken' and 'rice'**:
+
+    ```
+    /dishes?ingredients=chicken,rice
     ```
 
 11. **Paginate results with page number and page size**:
