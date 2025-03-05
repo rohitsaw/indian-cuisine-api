@@ -17,9 +17,13 @@ const getAllDishes = async (req, res) => {
       return res.status(400).send({ error: error });
     }
 
-    const whereClause = queryParamsToWhereClause(value);
+    const { pageNumber, pageSize, ...filteredValueForWhereClause } = value;
+    const whereClause = queryParamsToWhereClause(filteredValueForWhereClause);
 
-    const dishes = await getAllDishesFromDB(whereClause);
+    const dishes = await getAllDishesFromDB(whereClause, {
+      pageSize,
+      pageNumber,
+    });
     const sanitizeDishes = convertValuesToStartCase(dishes);
 
     return res.status(200).send(sanitizeDishes);

@@ -2,6 +2,9 @@ import { Joi } from "express-validation";
 
 const validateDishesSchema = (query) => {
   const schema = Joi.object({
+    pageNumber: Joi.number().optional().default(1).strict(false).greater(0),
+    pageSize: Joi.number().optional().default(10).strict(false).greater(0),
+
     diet: Joi.object({
       eq: Joi.string().lowercase().optional(),
       ne: Joi.string().lowercase().optional(),
