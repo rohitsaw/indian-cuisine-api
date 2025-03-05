@@ -235,9 +235,7 @@ paths:
           in: query
           description: List of ingredients (comma separated)
           schema:
-            type: array
-            items:
-              type: string
+            type: string
 
         - name: pageSize
           in: query
@@ -300,9 +298,7 @@ components:
         name:
           type: string
         ingredients:
-          type: array
-          items:
-            type: string
+          type: string
         diet:
           type: string
         prep_time:
