@@ -18,13 +18,13 @@ The `/dishes` endpoint supports the following query parameters:
 - `course` (string)
 - `state` (string)
 - `region` (string)
-- `ingredients` (array of string)
+- `ingredients` (comma separated string)
 - `pageNumber` (number)
 - `pageSize` (number)
 
 ### Supported Notations
 
-Each query parameter supports the following notations for querying data:
+Each query parameter supports the following notations for querying data except `ingredients`:
 
 - `eq`: Equal to
 - `ne`: Not equal to
@@ -83,7 +83,7 @@ Each query parameter supports the following notations for querying data:
     /dishes?state[eq]=null
     ```
 
-9. **Filter by ingredients containing 'chicken' and 'rice'**:
+9. **Filter dishes that can be made with ingredients 'chicken' and 'rice'**:
 
     ```
     /dishes?ingredients=chicken,rice
