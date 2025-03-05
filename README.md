@@ -5,7 +5,7 @@ Welcome to the Indian Cuisine API! This Express application allows you to query 
 ## Features
 
 - **GET /dishes**: Retrieve a list of dishes with various filtering and pagination options.
-- **Swagger Documentation**: Access the Swagger documentation at `/api-doc` to interact with the API.
+- **Swagger Documentation**: Access the Swagger documentation at `/api-docs` to interact with the API.
 
 ## Query Parameters
 
@@ -141,7 +141,7 @@ To get started with the Indian Cuisine API, follow these steps:
     Open your browser or API client and navigate to `http://localhost:3000/dishes`.
 
 5. **Swagger Documentation**:
-    Open your browser and navigate to `http://localhost:3000/api-doc` to access the Swagger documentation and interact with the API.
+    Open your browser and navigate to `http://localhost:3000/api-docs` to access the Swagger documentation and interact with the API.
 
 ## Contributing
 
