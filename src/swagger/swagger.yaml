@@ -14,6 +14,37 @@ paths:
       summary: Get all dishes
       description: Retrieve a list of all available Indian dishes
       parameters:
+        - name: name[eq]
+          in: query
+          description: Exact dish name
+          schema:
+            type: string
+        - name: name[ne]
+          in: query
+          description: Dish name not equal to
+          schema:
+            type: string
+        - name: name[lt]
+          in: query
+          description: Dish name less than
+          schema:
+            type: string
+        - name: name[gt]
+          in: query
+          description: Dish name greater than
+          schema:
+            type: string
+        - name: name[lte]
+          in: query
+          description: Dish name less than or equal to
+          schema:
+            type: string
+        - name: name[gte]
+          in: query
+          description: Dish name greater than or equal to
+          schema:
+            type: string
+
         - name: diet[eq]
           in: query
           description: Exact diet type

@@ -34,7 +34,7 @@ const queryParamsToWhereClause = (query) => {
         if (operator === "ne")
           whereClause[key] = {
             ...whereClause[key],
-            [value ? Op.eq : Op.is]: value,
+            [value ? Op.ne : Op.not]: value,
           };
         if (operator === "gt")
           whereClause[key] = { ...whereClause[key], [Op.gt]: value };

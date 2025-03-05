@@ -5,6 +5,15 @@ const validateDishesSchema = (query) => {
     pageNumber: Joi.number().optional().default(1).strict(false).greater(0),
     pageSize: Joi.number().optional().default(10).strict(false).greater(0),
 
+    name: Joi.object({
+      eq: Joi.string().lowercase().optional(),
+      ne: Joi.string().lowercase().optional(),
+      gt: Joi.string().lowercase().optional(),
+      lt: Joi.string().lowercase().optional(),
+      gte: Joi.string().lowercase().optional(),
+      lte: Joi.string().lowercase().optional(),
+    }).optional(),
+
     diet: Joi.object({
       eq: Joi.string().lowercase().optional(),
       ne: Joi.string().lowercase().optional(),
