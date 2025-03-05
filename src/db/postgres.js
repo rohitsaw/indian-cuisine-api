@@ -3,7 +3,7 @@ import path from "path";
 
 import { createCuisineModel } from "./models/cuisine.js";
 import { parseCsv } from "../utils/csv.js";
-import { sanitezeIndianFoodArray } from "../utils/format.js";
+import { sanitezeIndianFoodArray } from "../utils/transform.js";
 
 let sequelize = null;
 

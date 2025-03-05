@@ -7,7 +7,7 @@ import {
   queryParamsToWhereClause,
   queryParamsToOrder,
 } from "../utils/utils.js";
-import { convertValuesToStartCase } from "../utils/format.js";
+import { convertValuesToStartCase } from "../utils/transform.js";
 
 import { validateDishesSchema } from "../validations/dishes.js";
 
