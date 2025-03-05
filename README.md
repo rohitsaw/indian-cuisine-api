@@ -11,19 +11,19 @@ Welcome to the Indian Cuisine API! This Express application allows you to query 
 
 The `/dishes` endpoint supports the following query parameters:
 
-- `name` (string)
-- `diet` (string)
-- `prep_time` (number)
-- `cook_time` (number)
-- `flavor_profile` (string)
-- `course` (string)
-- `state` (string)
-- `region` (string)
+- `name`
+- `diet`
+- `prep_time`
+- `cook_time`
+- `flavor_profile`
+- `course`
+- `state`
+- `region`
 - `ingredients` (comma separated string)
 
 ### Supported Notations for above query param
 
-Each query parameter supports the following notations for querying data except `ingredients`:
+Each query parameter supports the following notations for querying data except `ingredients` which directly accept comma separated strings:
 
 - `eq`: Equal to
 - `ne`: Not equal to
@@ -34,72 +34,69 @@ Each query parameter supports the following notations for querying data except `
 
 ### Pagination
 
-- `pagination` (number)
-
-### Supported Notation for pagination query param
-
-- `pageSize`: Number of dishes per page
-- `pageNumber`: should be less than totalPages
+- `pagination`
+  - `pageSize` (number): Number of dishes per page
+  - `pageNumber` (number): Page number to retrieve
 
 ### Sorting
 
-- `sort` (comma separated string eg;- name:asc, diet:desc)
+- `sort` (comma separated string of `field:order` eg:- name:asc, diet:desc)
 
 ### Example Queries
 
-1. **Filter by diet equal to vegetarian**:
+1.  **Filter by diet equal to vegetarian**:
 
-   ```
-   /dishes?diet[eq]=vegetarian
-   ```
+    ```
+    /dishes?diet[eq]=vegetarian
+    ```
 
-2. **Filter by preparation time less than 30 minutes**:
+2.  **Filter by preparation time less than 30 minutes**:
 
-   ```
-   /dishes?prep_time[lt]=30
-   ```
+    ```
+    /dishes?prep_time[lt]=30
+    ```
 
-3. **Filter by cook time greater than or equal to 45 minutes**:
+3.  **Filter by cook time greater than or equal to 45 minutes**:
 
-   ```
-   /dishes?cook_time[gte]=45
-   ```
+    ```
+    /dishes?cook_time[gte]=45
+    ```
 
-4. **Filter by flavor profile not equal to spicy**:
+4.  **Filter by flavor profile not equal to spicy**:
 
-   ```
-   /dishes?flavor_profile[ne]=spicy
-   ```
+    ```
+    /dishes?flavor_profile[ne]=spicy
+    ```
 
-5. **Filter by course equal to main**:
+5.  **Filter by course equal to main**:
 
-   ```
-   /dishes?course[eq]=main
-   ```
+    ```
+    /dishes?course[eq]=main
+    ```
 
-6. **Filter by state equal to Punjab**:
+6.  **Filter by state equal to Punjab**:
 
-   ```
-   /dishes?state[eq]=Punjab
-   ```
+    ```
+    /dishes?state[eq]=Punjab
+    ```
 
-7. **Filter by region equal to North**:
+7.  **Filter by region equal to North**:
 
-   ```
-   /dishes?region[eq]=North
-   ```
+    ```
+    /dishes?region[eq]=North
+    ```
 
-8. **Filter by state equal to null**:
+8.  **Filter by state equal to null**:
 
-   ```
-   /dishes?state[eq]=null
-   ```
+    ```
+    /dishes?state[eq]=null
+    ```
 
-9. **Filter dishes that can be made with ingredients 'chicken' and 'rice'**:
+9.  **Filter dishes that can be made with ingredients 'chicken' and 'rice'**:
 
-   ```
-   /dishes?ingredients=chicken,rice
-   ```
+    ```
+    /dishes?ingredients=chicken,rice
+    ```
 
 10. **Filter by preparation time between 10 and 20 minutes**:
 
@@ -113,12 +110,11 @@ Each query parameter supports the following notations for querying data except `
     /dishes?pagination[pageNumber]=1&pagination[pageSize]=10
     ```
 
-
 12. **Sort by name in ascending order and diet in descending order**:
 
-        ```
-        /dishes?sort=name:asc,diet:desc
-        ```
+    ```
+    /dishes?sort=name:asc,diet:desc
+    ```
 
 ### Response Structure
 
@@ -172,4 +168,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or feedback, please contact us at [support@example.com](mailto:support@example.com).
+For any questions or feedback, please contact us at [developer.rohitsaw@gmail.com](mailto:developer.rohitsaw@gmail.com).
