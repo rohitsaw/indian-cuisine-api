@@ -14,14 +14,50 @@ paths:
       summary: Get all dishes
       description: Retrieve a list of all available Indian dishes
       parameters:
+        - name: diet[eq]
+          in: query
+          description: Exact diet type
+          schema:
+            type: string
+        - name: diet[ne]
+          in: query
+          description: Diet type not equal to
+          schema:
+            type: string
+        - name: diet[lt]
+          in: query
+          description: Diet type less than
+          schema:
+            type: string
+        - name: diet[gt]
+          in: query
+          description: Diet type greater than
+          schema:
+            type: string
+        - name: diet[lte]
+          in: query
+          description: Diet type less than or equal to
+          schema:
+            type: string
+        - name: diet[gte]
+          in: query
+          description: Diet type greater than or equal to
+          schema:
+            type: string
+
         - name: prep_time[eq]
           in: query
           description: Exact preparation time
           schema:
             type: integer
-        - name: prep_time[gte]
+        - name: prep_time[ne]
           in: query
-          description: Minimum preparation time
+          description: Preparation time not equal to
+          schema:
+            type: integer
+        - name: prep_time[lt]
+          in: query
+          description: Preparation time less than
           schema:
             type: integer
         - name: prep_time[gt]
@@ -31,12 +67,12 @@ paths:
             type: integer
         - name: prep_time[lte]
           in: query
-          description: Maximum preparation time
+          description: Preparation time less than or equal to
           schema:
             type: integer
-        - name: prep_time[lt]
+        - name: prep_time[gte]
           in: query
-          description: Preparation time less than
+          description: Preparation time greater than or equal to
           schema:
             type: integer
 
@@ -45,9 +81,14 @@ paths:
           description: Exact cooking time
           schema:
             type: integer
-        - name: cook_time[gte]
+        - name: cook_time[ne]
           in: query
-          description: Minimum cooking time
+          description: Cooking time not equal to
+          schema:
+            type: integer
+        - name: cook_time[lt]
+          in: query
+          description: Cooking time less than
           schema:
             type: integer
         - name: cook_time[gt]
@@ -57,12 +98,155 @@ paths:
             type: integer
         - name: cook_time[lte]
           in: query
-          description: Maximum cooking time
+          description: Cooking time less than or equal to
           schema:
             type: integer
-        - name: cook_time[lt]
+        - name: cook_time[gte]
           in: query
-          description: Cooking time less than
+          description: Cooking time greater than or equal to
+          schema:
+            type: integer
+
+        - name: flavor_profile[eq]
+          in: query
+          description: Exact flavor profile
+          schema:
+            type: string
+        - name: flavor_profile[ne]
+          in: query
+          description: Flavor profile not equal to
+          schema:
+            type: string
+        - name: flavor_profile[lt]
+          in: query
+          description: Flavor profile less than
+          schema:
+            type: string
+        - name: flavor_profile[gt]
+          in: query
+          description: Flavor profile greater than
+          schema:
+            type: string
+        - name: flavor_profile[lte]
+          in: query
+          description: Flavor profile less than or equal to
+          schema:
+            type: string
+        - name: flavor_profile[gte]
+          in: query
+          description: Flavor profile greater than or equal to
+          schema:
+            type: string
+
+        - name: course[eq]
+          in: query
+          description: Exact course
+          schema:
+            type: string
+        - name: course[ne]
+          in: query
+          description: Course not equal to
+          schema:
+            type: string
+        - name: course[lt]
+          in: query
+          description: Course less than
+          schema:
+            type: string
+        - name: course[gt]
+          in: query
+          description: Course greater than
+          schema:
+            type: string
+        - name: course[lte]
+          in: query
+          description: Course less than or equal to
+          schema:
+            type: string
+        - name: course[gte]
+          in: query
+          description: Course greater than or equal to
+          schema:
+            type: string
+
+        - name: state[eq]
+          in: query
+          description: Exact state
+          schema:
+            type: string
+        - name: state[ne]
+          in: query
+          description: State not equal to
+          schema:
+            type: string
+        - name: state[lt]
+          in: query
+          description: State less than
+          schema:
+            type: string
+        - name: state[gt]
+          in: query
+          description: State greater than
+          schema:
+            type: string
+        - name: state[lte]
+          in: query
+          description: State less than or equal to
+          schema:
+            type: string
+        - name: state[gte]
+          in: query
+          description: State greater than or equal to
+          schema:
+            type: string
+
+        - name: region[eq]
+          in: query
+          description: Exact region
+          schema:
+            type: string
+        - name: region[ne]
+          in: query
+          description: Region not equal to
+          schema:
+            type: string
+        - name: region[lt]
+          in: query
+          description: Region less than
+          schema:
+            type: string
+        - name: region[gt]
+          in: query
+          description: Region greater than
+          schema:
+            type: string
+        - name: region[lte]
+          in: query
+          description: Region less than or equal to
+          schema:
+            type: string
+        - name: region[gte]
+          in: query
+          description: Region greater than or equal to
+          schema:
+            type: string
+
+        - name: ingredients
+          in: query
+          description: List of ingredients (comma separated)
+          schema:
+            type: array
+            items:
+              type: string
+
+        - name: pageSize
+          in: query
+          description: Number of items per page
+          schema:
+            type: integer
+        - name: pageNumber
+          in: query
+          description: Page number to retrieve
           schema:
             type: integer
 
@@ -72,9 +256,18 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Dish"
+                type: object
+                properties:
+                  pageNumber:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  totalPages:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dish"
 
   /dishes/{id}:
     get:
@@ -97,26 +290,6 @@ paths:
         "404":
           description: Dish not found
 
-  /dishes/by-ingredients:
-    get:
-      summary: Find dishes by ingredients
-      description: Retrieve dishes that can be prepared with the given ingredients
-      parameters:
-        - name: ingredients
-          in: query
-          description: Comma-separated list of available ingredients
-          schema:
-            type: string
-      responses:
-        "200":
-          description: List of matching dishes
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Dish"
-
 components:
   schemas:
     Dish:
@@ -127,7 +300,9 @@ components:
         name:
           type: string
         ingredients:
-          type: string
+          type: array
+          items:
+            type: string
         diet:
           type: string
         prep_time:
