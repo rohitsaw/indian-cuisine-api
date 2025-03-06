@@ -89,6 +89,7 @@ const validateDishesSchema = (query) => {
     sort: Joi.string()
       .custom((value, helpers) => {
         const validFields = [
+          "id",
           "name",
           "diet",
           "prep_time",
