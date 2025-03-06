@@ -113,7 +113,8 @@ const validateDishesSchema = (query) => {
         }
         return sortParams;
       })
-      .optional(),
+      .optional()
+      .default(["id:asc"]),
 
     pagination: Joi.object({
       pageNumber: Joi.number().optional().default(1).strict(false).greater(0),
